@@ -27,7 +27,7 @@ public class PI {
                             conexion = new Socket("localhost", 50000+nodo);
                             break;
                         }catch(Exception ex){Thread.sleep(3000);}
-
+                    System.out.println("Conectado al Nodo: "+nodo);
                     DataInputStream DIS = new DataInputStream(conexion.getInputStream());
                     double suma = DIS.readDouble();
 
@@ -43,6 +43,7 @@ public class PI {
 
     static void servidor(int nodo) throws IOException {
         ServerSocket servidor = new ServerSocket(50000+nodo);
+        System.out.println("Esperando conmexion en el nodo: "+ nodo);
         Socket conexion = servidor.accept();
 
         DataOutputStream salida = new DataOutputStream(conexion.getOutputStream());
@@ -67,12 +68,12 @@ public class PI {
 
             if(nodo == 0 ){
                 Worker cliente[] = new Worker[4];
-                for (int i = 0; i <=4 ; i++){
-                    cliente[i] = new Worker(i);
+                for (int i = 0; i <4 ; i++){
+                    cliente[i] = new Worker(i+1);
                     cliente[i].start();
                 }
 
-                for (int j = 0; j <=4 ; j++) {
+                for (int j = 0; j <4 ; j++) {
                     cliente[j].join();
                 }
                 System.out.println("Valor de pi: "+PI);
