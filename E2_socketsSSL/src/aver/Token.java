@@ -1,4 +1,4 @@
-package alphaAnilloSSL;
+//package alphaAnilloSSL;
 
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocketFactory;
@@ -33,8 +33,7 @@ public class Token {
     }
 
     public static short cliente(short nodo) {
-        System.setProperty("javax.net.ssl.trustStore","keystore_cliete.jks");
-        System.setProperty("javax.net.ssl.trustStorePassword","1234567");
+       
 
         if( nodo == 0 )
             nodo = 5;
@@ -70,7 +69,10 @@ public class Token {
     }
 
     public static void main(String[] args) throws IOException {
-
+        System.setProperty("javax.net.ssl.keyStore","keystore_servidor.jks");
+        System.setProperty("javax.net.ssl.keyStorePassword","1234567");
+        System.setProperty("javax.net.ssl.trustStore","keystore_cliente.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword","1234567");
         short nodo = Short.parseShort(args[0]), token = 0;
 
         if (args.length == 1) {
@@ -92,3 +94,7 @@ public class Token {
         }
     }
 }
+// sudo java -Djavax.net.ssl.keyStore=keystore_servidor.jks -Djavax.net.ssl.keyStorePassword=1234567 Token
+// sudo java -Djavax.net.ssl.trustStore=keystore_cliente.jks -Djavax.net.ssl.trustStorePassword=1234567 Token
+
+// sudo java -Djavax.net.ssl.keyStore=keystore_servidor.jks -Djavax.net.ssl.keyStorePassword=1234567 -Djavax.net.ssl.trustStore=keystore_servidor.jks -Djavax.net.ssl.trustStorePassword=1234567 Token
