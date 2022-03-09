@@ -16,7 +16,7 @@ public class matrixTest {
         }
         System.out.println("\n");
     }
-    
+
     public static void transpMatrixB(){
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
@@ -27,7 +27,7 @@ public class matrixTest {
         }
     }
     public static void main(String[] args){
-            //inicializar matrices A y B
+        /*    //inicializar matrices A y B
         for (int i=0; i<N; i++) {
             for (int j=0; j<N; j++) {
                     A[i][j] = i+5*j;
@@ -41,6 +41,6 @@ public class matrixTest {
 
         transpMatrixB();
         printMatrix(B,"B");
-
+        */
     }
 }

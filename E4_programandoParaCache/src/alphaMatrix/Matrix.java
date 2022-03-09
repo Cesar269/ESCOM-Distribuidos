@@ -154,9 +154,9 @@ public class Matrix {
         if (nodo == 0) {
             for (int i=0; i<N; i++) {
                 for (int j=0; j<N; j++) {
-                    A[i][j] = i + 5 *j;
-                    B[i][j] = 5 * i - j;
-                    C[i][j] = 0;
+                    A[i][j] = i+5*j;
+                    B[i][j] = i-5*j;
+                    C[i][j] = 1;
                 }
             }
             //Imprimimos Matríz
