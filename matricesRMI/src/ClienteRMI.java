@@ -1,7 +1,4 @@
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 
 public class ClienteRMI {
     static int N = 8;
@@ -60,16 +57,18 @@ public class ClienteRMI {
 
     public static void main(String[] args) throws Exception {
 
-        //cambiar localhost por la ip del servidor
-        String url = "rmi://10.0.0.5/prueba";
+        //URL del servidor RMI
+        String url = "rmi://10.0.0.5/ejemplo";
         InterfaceRMI r = (InterfaceRMI) Naming.lookup(url);
 
-        String url1 = "rmi://10.0.0.6/prueba";
-        InterfaceRMI r1 = (InterfaceRMI)Naming.lookup(url);
+        String url1 = "rmi://10.0.0.6/ejemplo";
+        InterfaceRMI r1 = (InterfaceRMI)Naming.lookup(url1);
 
-        String url2 = "rmi://10.0.0.7/prueba";
-        InterfaceRMI r2 = (InterfaceRMI)Naming.lookup(url);
+        String url2 = "rmi://10.0.0.7/ejemplo";
+        InterfaceRMI r2 = (InterfaceRMI)Naming.lookup(url2);
 
+        String url3 = "rmi://10.0.0.8/ejemplo";
+        InterfaceRMI r3 = (InterfaceRMI)Naming.lookup(url3);
 
         //inicializar matrices
         for (int i = 0; i < N; i++) {
@@ -88,7 +87,7 @@ public class ClienteRMI {
             }
         }
 
-        /*         ________
+        /*          ________
          *     0   |___M1___|
          *    N/4  |___M2___|
          *    N/2  |___M3___|
@@ -106,7 +105,7 @@ public class ClienteRMI {
         double[][] B3 = separa_matriz(A, N / 2);
         double[][] B4 = separa_matriz(A, 3 * N / 4);
 
-        /*         ________     ________      _________________
+        /*          ________     ________      _________________
          *     0   |___A1___|   |___B1___|    |C1  C2  C3  C4  |
          *    N/4  |___A2___| x |___B2___| =  |C5  C6  C7  C8  |
          *    N/2  |___A3___|   |___B3___|    |C9  C10 C11 C12 |
