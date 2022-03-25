@@ -3,17 +3,17 @@ import java.rmi.Naming;
 public class ClienteRMI {
     static final Object obj = new Object();
     static int N = 8;
-    static double A[][] = new double[N][N];
-    static double B[][] = new double[N][N];
-    static double C[][] = new double[N][N];
-    static double[][] A1;
-    static double[][] A2;
-    static double[][] A3;
-    static double[][] A4;
-    static double[][] B1;
-    static double[][] B2;
-    static double[][] B3;
-    static double[][] B4;
+    static float A[][] = new float[N][N];
+    static float B[][] = new float[N][N];
+    static float C[][] = new float[N][N];
+    static float[][] A1;
+    static float[][] A2;
+    static float[][] A3;
+    static float[][] A4;
+    static float[][] B1;
+    static float[][] B2;
+    static float[][] B3;
+    static float[][] B4;
 
     static String[] hilos = { "localhost", "localhost", "localhost", "localhost" };
 
@@ -31,10 +31,10 @@ public class ClienteRMI {
                 InterfaceRMI r = (InterfaceRMI) Naming.lookup(url);
                 switch (hilo) {
                     case 1:
-                        double[][] C1 = r.multiplica_matrices(A1, B1, N);
-                        double[][] C2 = r.multiplica_matrices(A1, B2, N);
-                        double[][] C3 = r.multiplica_matrices(A1, B3, N);
-                        double[][] C4 = r.multiplica_matrices(A1, B4, N);
+                        float[][] C1 = r.multiplica_matrices(A1, B1, N);
+                        float[][] C2 = r.multiplica_matrices(A1, B2, N);
+                        float[][] C3 = r.multiplica_matrices(A1, B3, N);
+                        float[][] C4 = r.multiplica_matrices(A1, B4, N);
                         synchronized (obj) {
                             acomoda_matriz(C, C1, 0, 0);
                             acomoda_matriz(C, C2, 0, N / 4);
@@ -45,10 +45,10 @@ public class ClienteRMI {
                         break;
 
                     case 2:
-                        double[][] C5 = r.multiplica_matrices(A2, B1, N);
-                        double[][] C6 = r.multiplica_matrices(A2, B2, N);
-                        double[][] C7 = r.multiplica_matrices(A2, B3, N);
-                        double[][] C8 = r.multiplica_matrices(A2, B4, N);
+                        float[][] C5 = r.multiplica_matrices(A2, B1, N);
+                        float[][] C6 = r.multiplica_matrices(A2, B2, N);
+                        float[][] C7 = r.multiplica_matrices(A2, B3, N);
+                        float[][] C8 = r.multiplica_matrices(A2, B4, N);
                         synchronized (obj) {
 
                             acomoda_matriz(C, C5, N / 4, 0);
@@ -60,10 +60,10 @@ public class ClienteRMI {
 
                     case 3:
 
-                        double[][] C9 = r.multiplica_matrices(A3, B1, N);
-                        double[][] C10 = r.multiplica_matrices(A3, B2, N);
-                        double[][] C11 = r.multiplica_matrices(A3, B3, N);
-                        double[][] C12 = r.multiplica_matrices(A3, B4, N);
+                        float[][] C9 = r.multiplica_matrices(A3, B1, N);
+                        float[][] C10 = r.multiplica_matrices(A3, B2, N);
+                        float[][] C11 = r.multiplica_matrices(A3, B3, N);
+                        float[][] C12 = r.multiplica_matrices(A3, B4, N);
                         synchronized (obj) {
                             acomoda_matriz(C, C9, N / 2, 0);
                             acomoda_matriz(C, C10, N / 2, N / 4);
@@ -75,10 +75,10 @@ public class ClienteRMI {
 
                     case 4:
 
-                        double[][] C13 = r.multiplica_matrices(A4, B1, N);
-                        double[][] C14 = r.multiplica_matrices(A4, B2, N);
-                        double[][] C15 = r.multiplica_matrices(A4, B3, N);
-                        double[][] C16 = r.multiplica_matrices(A4, B4, N);
+                        float[][] C13 = r.multiplica_matrices(A4, B1, N);
+                        float[][] C14 = r.multiplica_matrices(A4, B2, N);
+                        float[][] C15 = r.multiplica_matrices(A4, B3, N);
+                        float[][] C16 = r.multiplica_matrices(A4, B4, N);
                         synchronized (obj) {
                             acomoda_matriz(C, C13, (3 * N) / 4, 0);
                             acomoda_matriz(C, C14, (3 * N) / 4, N / 4);
@@ -95,8 +95,8 @@ public class ClienteRMI {
         }
     }
 
-    public static double[][] separa_matriz(double[][] A, int inicio) {
-        double[][] M = new double[N / 4][N];
+    public static float[][] separa_matriz(float[][] A, int inicio) {
+        float[][] M = new float[N / 4][N];
         for (int i = 0; i < N / 4; i++) {
             for (int j = 0; j < N; j++) {
                 M[i][j] = A[i + inicio][j];
@@ -105,11 +105,11 @@ public class ClienteRMI {
         return M;
     }
 
-    public static void printMatrix(double[][] m, String matrixName) {
+    public static void printMatrix(float[][] m, String matrixName) {
         if (N == 8) {
             System.out.println("Matriz " + matrixName);
-            for (double[] i : m) {
-                for (double j : i) {
+            for (float[] i : m) {
+                for (float j : i) {
                     System.out.print(j + " ");
                 }
                 System.out.println();
@@ -118,7 +118,7 @@ public class ClienteRMI {
         }
     }
 
-    public static void acomoda_matriz(double[][] C, double[][] c, int renglon, int columna) {
+    public static void acomoda_matriz(float[][] C, float[][] c, int renglon, int columna) {
         for (int i = 0; i < N / 4; i++) {
             for (int j = 0; j < N / 4; j++) {
                 C[i + renglon][j + columna] = c[i][j];
@@ -126,10 +126,10 @@ public class ClienteRMI {
         }
     }
 
-    public static void checksum(double[][] m) {
-        double checksum = 0;
-        for (double[] i : m) {
-            for (double j : i) {
+    public static void checksum(float[][] m) {
+        float checksum = 0;
+        for (float[] i : m) {
+            for (float j : i) {
                 checksum += j;
             }
         }
@@ -149,17 +149,17 @@ public class ClienteRMI {
         // trasponer la matriz B.
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
-                double x = B[i][j];
+                float x = B[i][j];
                 B[i][j] = B[j][i];
                 B[j][i] = x;
             }
         }
 
         /*
-         * ________
-         * 0 |___M1___|
-         * N/4 |___M2___|
-         * N/2 |___M3___|
+         *        ________
+         * 0     |___M1___|
+         * N/4   |___M2___|
+         * N/2   |___M3___|
          * 3*N/4 |___M4___|
          */
         // Separamos la matriz A en 4

@@ -6,8 +6,8 @@ public class ClaseRMI extends UnicastRemoteObject implements InterfaceRMI {
         super();
     }
 
-    public double[][] multiplica_matrices(double[][] A, double[][] B, int N) {
-        double[][] C = new double[N/4][N/4];
+    public float[][] multiplica_matrices(float[][] A, float[][] B, int N) {
+        float[][] C = new float[N/4][N/4];
         for (int i=0; i<N/4; i++) {
             for (int j=0; j<N/4; j++)
                 for (int k=0; k<N; k++)
