@@ -164,7 +164,7 @@ public class ClienteRMI {
 
         //-------------------------------------------------
         //calcular y desplegar el checksum
-        printMatrix(C,"C");
+        //printMatrix(C,"C");
         System.out.println();
         checksum(C);
 
