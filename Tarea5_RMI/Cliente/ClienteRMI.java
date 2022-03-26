@@ -15,6 +15,7 @@ public class ClienteRMI {
     static float[][] B3;
     static float[][] B4;
 
+    //para pruebas en local cambiar los elemetos del arreglo a "localhost"
     static String[] hilos = { "20.230.180.0", "20.230.181.194", "20.231.210.50","104.43.230.227" };
     
 
@@ -32,10 +33,25 @@ public class ClienteRMI {
                 InterfaceRMI r = (InterfaceRMI) Naming.lookup(url);
                 switch (hilo) {
                     case 1:
+                     /*          ________     ________      _________________
+         *     0   |___A1___|   |___B1___|    |C1  C2  C3  C4  |
+         *    N/4  |___A2___| x |___B2___| =  |C5  C6  C7  C8  |
+         *    N/2  |___A3___|   |___B3___|    |C9  C10 C11 C12 |
+         *   3*N/4 |___A4___|   |___B4___|    |C13_C14_C15_C16_|
+         */
                         float[][] C1 = r.multiplica_matrices(A1, B1, N);
                         float[][] C2 = r.multiplica_matrices(A1, B2, N);
                         float[][] C3 = r.multiplica_matrices(A1, B3, N);
                         float[][] C4 = r.multiplica_matrices(A1, B4, N);
+                           /*
+         *          0  N/4  N/2  3*N/4
+         *         _________________
+         *   0    |C1 |C2  |C3  |C4 |
+         *   N/4  |C5 |C6  |C7  |C8 |
+         *   N/2  |C9 |C10 |C11 |C12|
+         *  3*N/4 |C13|C14 |C15 |C16|
+         *         -----------------
+         * */
                         synchronized (obj) {
                             acomoda_matriz(C, C1, 0, 0);
                             acomoda_matriz(C, C2, 0, N / 4);
