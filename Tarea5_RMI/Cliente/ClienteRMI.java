@@ -2,7 +2,7 @@ import java.rmi.Naming;
 
 public class ClienteRMI {
     static final Object obj = new Object();
-    static int N = 8;
+    static int N = 4000;
     static float A[][] = new float[N][N];
     static float B[][] = new float[N][N];
     static float C[][] = new float[N][N];
@@ -15,7 +15,8 @@ public class ClienteRMI {
     static float[][] B3;
     static float[][] B4;
 
-    static String[] hilos = { "localhost", "localhost", "localhost", "localhost" };
+    static String[] hilos = { "20.230.180.0", "20.230.181.194", "20.231.210.50","104.43.230.227" };
+    
 
     static class Worker extends Thread {
         int hilo;
@@ -146,6 +147,10 @@ public class ClienteRMI {
                 C[i][j] = 0;
             }
         }
+        if (N == 8) {
+            printMatrix(A, "A");
+            printMatrix(B, "B antes de transponer");
+        }
         // trasponer la matriz B.
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < i; j++) {
@@ -156,10 +161,10 @@ public class ClienteRMI {
         }
 
         /*
-         *        ________
-         * 0     |___M1___|
-         * N/4   |___M2___|
-         * N/2   |___M3___|
+         * ________
+         * 0 |___M1___|
+         * N/4 |___M2___|
+         * N/2 |___M3___|
          * 3*N/4 |___M4___|
          */
         // Separamos la matriz A en 4
@@ -169,10 +174,10 @@ public class ClienteRMI {
         A4 = separa_matriz(A, 3 * N / 4);
 
         // Separamos la matriz B en 4
-        B1 = separa_matriz(A, 0);
-        B2 = separa_matriz(A, N / 4);
-        B3 = separa_matriz(A, N / 2);
-        B4 = separa_matriz(A, 3 * N / 4);
+        B1 = separa_matriz(B, 0);
+        B2 = separa_matriz(B, N / 4);
+        B3 = separa_matriz(B, N / 2);
+        B4 = separa_matriz(B, 3 * N / 4);
 
         Worker[] cliente = new Worker[4];// se instancia a worker
         // Inicializamos a worker para que se conecte al nodo indicado
@@ -187,7 +192,10 @@ public class ClienteRMI {
 
         // -------------------------------------------------
         // calcular y desplegar el checksum
-        // printMatrix(C, "C");
+        if (N == 8) {
+            printMatrix(B, "B transpuesta");
+            printMatrix(C, "C");
+        }
         System.out.println();
         checksum(C);
     }
