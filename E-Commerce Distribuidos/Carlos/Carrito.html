@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Ejemplo E-Commerce</title>
+        
+    </head>
+    <body>
+        <center>
+            <h1>Carrito de compras</h1>
+
+            <label for="Search">Busqueda: </label>
+            <input type="search" id="Search" name="search"><br>
+
+            <div id="consulta_producto" style="display:none">
+                <div id="encabezado_consulta">
+                    <h2 style="text-align:center">Consulta producto</h2>
+                </div>
+               
+               
+                Descripción del articulo *<br>
+                <input type="text" id="consulta_descripcion" value="" style="width:250px"/><br>
+                Precio *<br>
+                <input type="number" id="consulta_precio" value="" style="width:250px"/><br>
+                Cantidad en Almacen *<br>
+                <input type="number" id="consulta_cantidad" value="" style="width:250px"/><br>
+                <img id="alta_imagen" width="100px" src="/usuario_sin_foto.png"></img><br>
+                <input type="file" onchange="readSingleFile(files,get('alta_imagen'))" multiple="false" accept="image/*"/><br>
+                <br>
+                
+                <img id="consulta_imagen" width="100px" src="/usuario_sin_foto.png"></img>
+                <input type="file" id="consulta_file" onchange="readSingleFile(files,get('consulta_imagen'))" multiple="false" accept="image/*"/><br>
+                
+                <button onclick="quita_foto()">Quitar foto</button><br>
+                <br>
+                <button type="button" onclick="modifica()" style="width:250px;height:40px">Guardar cambios</button></br>
+            </div>
+            <div id="boton_consulta">
+				<br>
+				<button type="button" onclick="consulta()" style="width:250px;height:40px">Buscar producto</button></br>
+			</div>
+            
+
+        </center>
+    </body>
+</html>
